@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    # build: .
+    image: korawit0/check-image-dpi:v1
+    container_name: dpi-checker-bot
+    ports:
+          - "8000:8000"
+    volumes:
+      # Map โฟลเดอร์ data จากเครื่องเรา -> ไปที่ /app/data ใน container
+      - ./data:/app/data
+      # Map โฟลเดอร์ output จากเครื่องเรา -> ไปที่ /app/output ใน container
+      - ./output:/app/output
+      - ./output_images:/app/output_images
+      # (Optional) Map ไฟล์ code เพื่อให้แก้ code แล้วรันใหม่ได้เลยโดยไม่ต้อง build image ใหม่
+      - ./main.py:/app/main.py
+      - ./core:/app/core
+    # สั่งให้รัน python script (ถ้าใน Dockerfile มี CMD แล้ว บรรทัดนี้ไม่ต้องใส่ก็ได้)
+    # command: python check_image.py
