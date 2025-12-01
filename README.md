@@ -1,0 +1,1 @@
+"# bot-check-image-dpi" 
